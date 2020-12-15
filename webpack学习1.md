@@ -122,7 +122,7 @@ webpack 支持使用 `loader` 对文件进行预处理。你可以构建包括 J
 
 ### plugins
 
-`plugin`可以在 webpack 运行到某个节点，帮你做一些事情
+`plugin`可以在 webpack 运行到某个节点，帮你做一些事情，`plugin`目的在于解决 loader 无法实现的其他事。
 
 #### HtmlWebpackPlugin
 
@@ -151,3 +151,30 @@ module.exports = {
 		new CleanWebpackPlugin(['dist'])
 	]
 ```
+
+更多插件参考 [plugin](https://webpack.docschina.org/plugins/)
+
+### entry & output
+
+打包的入口起点和输出， 即使可以存在多个 `entry` 起点，但只能指定一个 `output` 配置
+
+```
+ module.exports = {
+  entry: {
+    app: './src/app.js',
+    search: './src/search.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: __dirname + '/dist',
+    publicPath: 'http://cdn.com.cn',
+  }
+};
+
+// 写入到硬盘：./dist/app.js, ./dist/search.js
+
+```
+
+`publicPath` 支持文件路径使用 cdn 地址
+
+### sourceMap
