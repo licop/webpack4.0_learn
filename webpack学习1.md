@@ -2,7 +2,7 @@
 
 **核心定义:** webpack 是一个静态模块打包工具(module bundler)
 
-**模块 module:** 在模块化编程中，开发者将程序分解为功能离散的 chunk，并称之*模块*
+**模块 module:** 在模块化编程中，开发者将程序分解为功能离散的 chunk，并称之*模块*。
 
 #### webpack 天生支持的模块
 
@@ -40,9 +40,9 @@ string = 'production': 'none' | 'development' | 'production'
 
 #### loader
 
-`webpack` 不能识别非 js 格式文件， 只能使用 loader 用于对模块的源代码进行转换。
+`webpack` 不能识别非 js 格式文件， 只能使用 `loader` 用于对模块的源代码进行转换。webpack 根据正则表达式，来确定应该查找哪些文件，并将其提供给指定的 `loader`。
 
-webpack 支持使用 loader 对文件进行预处理。你可以构建包括 JavaScript 在内的任何静态资源。并且可以使用 Node.js 轻松编写自己的 loader。
+webpack 支持使用 `loader` 对文件进行预处理。你可以构建包括 JavaScript 在内的任何静态资源。并且可以使用 Node.js 轻松编写自己的 `loader`。
 
 如果一个静态文件不是 js 格式，则需要判断文件的结尾后缀，使用对应的文件格式的`loader`
 
@@ -81,7 +81,15 @@ webpack 支持使用 loader 对文件进行预处理。你可以构建包括 Jav
             test: /\.scss$/i,
             use: [
                 'style-loader',
-				'css-loader',
+				{
+                    loader: 'css-loader',
+                    options: {
+                        // 处理scss文件里引入其他scss文件，引入的scss文件也要走两个loader
+                        importLoaders: 2,
+                        // 是否开启css module打包
+                        modules: true
+                    }
+                },
 				'sass-loader',
 				'postcss-loader'
             ]
@@ -89,6 +97,57 @@ webpack 支持使用 loader 对文件进行预处理。你可以构建包括 Jav
     }
 ```
 
+在[css-loader](https://webpack.docschina.org/loaders/css-loader/)的`options`将`module`设置成`true`,可以使用`CSS Modules`组织样式，避免 css 全局污染, `CSS Modules`使用方式如下：
+
+```
+ import style from './style/index.scss'
+```
+
 > 注：use 数组里编译的顺序是从上到下，从右到左，如果不注意先后顺序打包时可能会报错
 
+#### 打包 iconfont 文件
+
+```
+  module: {
+        rules: [{
+            test: /\.(eot|ttf|svg)$/,
+			use: {
+				loader: 'file-loader'
+			}
+        }]
+    }
+```
+
 更多文件格式的参考 [loader](https://webpack.docschina.org/loaders/)
+
+### plugins
+
+`plugin`可以在 webpack 运行到某个节点，帮你做一些事情
+
+#### HtmlWebpackPlugin
+
+`HtmlWebpackPlugin` 会在打包结束后自动生成一个 html 文件，并把打包生成 js 自动引入到这个 html 文件中, 在文件被打包之后执行
+
+```
+module.exports = {
+    entry: 'index.js',
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        filename: 'index_bundle.js'
+    },
+    plugins: [
+      new HtmlWebpackPlugin({template: 'src/index.html'})
+    ]
+};
+
+```
+
+#### CleanWebpackPlugin
+
+`CleanWebpackPlugin` 在打包之前，帮你清理删除某个文件夹
+
+```
+    plugins: [
+		new CleanWebpackPlugin(['dist'])
+	]
+```
