@@ -283,3 +283,26 @@ webpack 没有提供自带的工具，我们需要自己安装
 ```
 
 当更新 css 文件时，`style-loader`帮我们自动完成了热替换；当它通过 HMR 接收到更新，它会使用新的样式替换旧的样式。
+
+- [模块热替换(hot module replacement)](https://webpack.docschina.org/concepts/hot-module-replacement/)
+- [Hot Module Replacement API](https://webpack.docschina.org/api/hot-module-replacement/)
+
+### babel
+
+使用`babel`对 js 文件进行转化，是的 ES6 语法变成各个浏览器能够识别的语法
+
+webpack 引入`babel-loader`, 并且新建`.babelrc`文件对 babel 进行配置
+
+```
+    module: {
+		rules: [{
+			test: /\.js$/,
+			exclude: /node_modules/,
+			loader: 'babel-loader',
+		}]
+    }
+```
+
+如果对 react 项目进行打包，需用使用`@babel/preset-react`对文件进行处理，是的`jsx`格式语法能够被翻译
+
+更多参考[babel 文档](https://babeljs.io/setup#installation)
