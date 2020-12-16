@@ -177,4 +177,20 @@ module.exports = {
 
 `publicPath` 支持文件路径使用 cdn 地址
 
-### sourceMap
+### Devtool
+
+`sourceMap`可以将打包后的代码与原代码做具体到行和列的映射(mapping),从而便于开发者查询问题和 debug, `Devtool`属性可以选择生成`sourceMap`的方式
+
+`sourceMap`有多种生成模式，各种模式可以自由组合，来满足各种环境下的需求 模式是`[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`
+
+- `inline-` source map 转换为 DataUrl 后添加到 bundle 中
+- `clean-` 没有列映射(column mapping)的 source map，可以提升构建速度
+- `eval-` 每个模块使用 eval() 执行，并且 source map 转换为 DataUrl 后添加到 eval() 中
+- `module-` 源自 loader 的 `source map` 会得到更好的处理结果
+
+#### 最佳实践
+
+- 开发环境下 `development`使用 `cheap-module-eval-source-map`，可以兼顾打包效率和精确度
+- 生产环境下 `production` 使用 `cheap-module-source-map`，提升精确度
+
+[更多关于 devtool 内容参考](https://webpack.docschina.org/configuration/devtool/)

@@ -1,5 +1,5 @@
 module.exports = {
     plugins: [
-        require('autoprefixer')
+        require('../../sourceMap/Demo/node_modules/autoprefixer')
     ]
 }
