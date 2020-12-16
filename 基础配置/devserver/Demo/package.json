@@ -1,0 +1,31 @@
+{
+  "name": "lesson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "watch": "webpack --watch",
+    "server": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.3.1",
+    "css-loader": "^1.0.1",
+    "express": "^4.17.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^4.5.0",
+    "node-sass": "^4.10.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "webpack": "^4.25.1"
+  }
+}

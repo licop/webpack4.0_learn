@@ -194,3 +194,92 @@ module.exports = {
 - 生产环境下 `production` 使用 `cheap-module-source-map`，提升精确度
 
 [更多关于 devtool 内容参考](https://webpack.docschina.org/configuration/devtool/)
+
+### devServer
+
+在每次编译代码时，手动运行 `npm run build` 会显得很麻烦。
+
+`webpack-dev-server`会开启一个服务器，打开一个端口，可以帮助你在代码发生变化后自动编译代码。
+
+webpack 没有提供自带的工具，我们需要自己安装
+
+```
+  npm install --save-dev webpack-dev-server
+```
+
+以下配置告知 `webpack-dev-server`，将 dist 目录下的文件 serve 到 localhost:9000 下。
+
+```
+   devServer: {
+		contentBase: path.join(__dirname, 'dist'),
+		compress: true,
+		port: 9000,
+		open: true
+	},
+```
+
+同样我们可以使用`webpack-dev-middleware`和`express`来自己编写一个，简单的`webpack-dev-server`。
+
+新建一个 `server.js`文件，然后执行`node server.js`
+
+```
+    const express = require('express');
+    const webpack = require('webpack');
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+
+    const app = express();
+    const config = require('./webpack.config.js');
+    const compiler = webpack(config);
+
+    // 告知 express 使用 webpack-dev-middleware，
+    // 以及将 webpack.config.js 配置文件作为基础配置。
+    app.use(
+    webpackDevMiddleware(compiler, {
+        publicPath: config.output.publicPath,
+    })
+    );
+
+    // 将文件 serve 到 port 3000。
+    app.listen(3000, function () {
+    console.log('Example app listening on port 3000!\n');
+    });
+```
+
+更多 [webpack-dev-server 配置](https://webpack.docschina.org/configuration/dev-server/) 参考
+
+### 热模块替换 hmr
+
+**模块热替换(HMR - hot module replacement)**功能会在应用程序运行过程中，替换、添加或删除 模块，而无需重新加载整个页面。
+
+#### hrm 作用
+
+- 保留在完全重新加载页面期间丢失的应用程序状态。
+- 只更新变更内容，以节省宝贵的开发时间。
+- 在源代码中 CSS/JS 产生修改时，会立刻在浏览器中进行更新，这几乎相当于在浏览器 devtools 直接更改样式。
+
+#### hrm 使用
+
+`webpack` 配置
+
+```
+    devServer: {
+		contentBase: path.join(__dirname, 'dist'),
+		port: 9000,
+		open: true,
+
+		hot: true,
+		hotOnly: true
+	}
+```
+
+当更新 js 文件时，可以在 js 文件中添加如下方法，实现某个模块的热替换
+
+```
+    if (module.hot) {
+        module.hot.accept('./print.js', function() {
+            printMe();
+        })
+    }
+```
+
+当更新 css 文件时，`style-loader`帮我们自动完成了热替换；当它通过 HMR 接收到更新，它会使用新的样式替换旧的样式。
