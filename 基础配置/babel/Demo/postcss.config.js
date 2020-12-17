@@ -1,5 +1,5 @@
 module.exports = {
   plugins: [
-  	require('autoprefixer')
+  	require('../../react/Demo/node_modules/autoprefixer')
   ]
 }
