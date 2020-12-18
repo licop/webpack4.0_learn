@@ -48,6 +48,24 @@ webpack 除了可以打包一个业务项目应用程序，还可以打包一些
 
 ### 打包 Typescript
 
+`TypeScript` 是 `JavaScript` 的超集，为其增加了类型系统，可以编译为普通 `JavaScript` 代码。
+
+使用 `ts-loader` 对 tsx 文件进行打包
+
+```
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/
+        }
+      ]
+    }
+```
+
+[更多 typescript 参考](https://webpack.docschina.org/guides/typescript/)
+
 ### 打包 PWA
 
 渐进式网络应用程序(`progressive web application - PWA`)，是一种可以提供类似于 native app(原生应用程序) 体验的 web app(网络应用程序)。PWA 可以用来做很多事。其中最重要的是，在离线(`offline`)时应用程序能够继续运行功能。这是通过使用名为 `Service Workers` 的 web 技术来实现的。
