@@ -101,4 +101,8 @@ webpack 除了可以打包一个业务项目应用程序，还可以打包一些
 
 [更多关于 pwa 打包](https://webpack.docschina.org/guides/progressive-web-application/)参考
 
+### 打包单页面应用
+
+当使用`react-router-dom` 的 `BrowserRouter`的路由使用单页面应用时，开发时需要将`devServer`的`historyApiFallback`设置为 `true`，否则将路由将无法跳转，生产环境下需要后端做 `nignx` 配置
+
 ### 打包多页面应用

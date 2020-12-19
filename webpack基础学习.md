@@ -218,6 +218,27 @@ webpack 没有提供自带的工具，我们需要自己安装
 	},
 ```
 
+#### 转发代理
+
+当拥有单独的 API 后端开发服务器并且希望在同一域上发送 API 请求时，我们可以使用`webpack-dev-server`对请求转发进行代理。
+
+使用后端在 `localhost:3000` 上，可以使用它来启用代理
+
+```
+   module.exports = {
+        //...
+        devServer: {
+            proxy: {
+            '/api': 'http://localhost:3000'
+            }
+        }
+    };
+```
+
+现在，对 `/api/users` 的请求会将请求代理到 `http://localhost:3000/api/users`。
+
+#### 实现一个简易的 webpackserver
+
 同样我们可以使用`webpack-dev-middleware`和`express`来自己编写一个，简单的`webpack-dev-server`。
 
 新建一个 `server.js`文件，然后执行`node server.js`
