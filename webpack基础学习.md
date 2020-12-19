@@ -268,6 +268,36 @@ webpack 没有提供自带的工具，我们需要自己安装
 
 更多 [webpack-dev-server 配置](https://webpack.docschina.org/configuration/dev-server/) 参考
 
+### 解析 resolve
+
+这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
+
+`resolve.alias`为 reslove 常用属性。创建 import 或 require 的别名，来确保模块引入变得更简单
+
+例如，一些位于 src/ 文件夹下的常用模块：
+
+```
+    const path = require('path');
+
+    module.exports = {
+    //...
+    resolve: {
+        alias: {
+        Utilities: path.resolve(__dirname, 'src/utilities/'),
+        Templates: path.resolve(__dirname, 'src/templates/'),
+        },
+    },
+    };
+```
+
+可以这样使用别名
+
+```
+  import Utility from 'Utilities/utility';
+```
+
+[更多 resolve 参考](https://webpack.docschina.org/configuration/resolve/)
+
 ### 热模块替换 hmr
 
 **模块热替换(HMR - hot module replacement)**功能会在应用程序运行过程中，替换、添加或删除 模块，而无需重新加载整个页面。
