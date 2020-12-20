@@ -9,3 +9,5 @@
 5. 使用 DIIPlugin 提高打包速度
 6. 控制宝文件的大小
 7. thread-loader,parallel-webpack,happypack 多进程打包
+8. 合理使用 source map
+9. 结合 stats 分析打包结果
