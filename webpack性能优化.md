@@ -1,6 +1,6 @@
-## webpack 性能优化
+# webpack 性能优化
 
-### 提升 webapck 打包速度的方法
+## 提升 webapck 打包速度的方法
 
 1. 跟上技术的迭代（Node， Npm， Yarn）
 2. 在尽可能少的模块上应用 Loader

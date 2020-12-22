@@ -1,10 +1,12 @@
-### 什么是 webpack
+# webpack 基础学习
+
+## 什么是 webpack
 
 **核心定义:** webpack 是一个静态模块打包工具(module bundler)
 
 **模块 module:** 在模块化编程中，开发者将程序分解为功能离散的 chunk，并称之*模块*。
 
-#### webpack 天生支持的模块
+### webpack 天生支持的模块
 
 - ES Module import 语句
 - commonJS `require()` 语句
@@ -12,7 +14,7 @@
 - stylesheet url(...) 或者 HTML <img src=...> 文件中的图片链接
 - WebAssembly 模块
 
-#### 通过 _loader_ 支持的模块
+### 通过 _loader_ 支持的模块
 
 - CoffeeScript
 - TypeScript
@@ -24,13 +26,13 @@
 
 > 当使用 webpack 打包 ES6 模块时，webpack 可以识别`import`和`export`语法，但是注意，如果使用其他的 ES6+ 特性，仍然需要引入 babel。
 
-### webpack 安装
+## webpack 安装
 
 - npm install webpack webpack-cli -g
 
-### webpack 配置
+## webpack 配置
 
-#### mode
+### mode
 
 - 提供 `mode` 配置选项，告知 webpack 使用相应模式的内置优化。
 
@@ -38,7 +40,7 @@ string = 'production': 'none' | 'development' | 'production'
 
 - 使用`production`会对代码进行压缩，使用`development`不会
 
-#### loader
+### loader
 
 `webpack` 不能识别非 js 格式文件， 只能使用 `loader` 用于对模块的源代码进行转换。webpack 根据正则表达式，来确定应该查找哪些文件，并将其提供给指定的 `loader`。
 
@@ -48,7 +50,7 @@ webpack 支持使用 `loader` 对文件进行预处理。你可以构建包括 J
 
 **常用配置方式**： `module.rules` 允许你在 webpack 配置中指定多个 loader。
 
-##### 打包图片
+#### 打包图片
 
 ```
     module: {
@@ -68,7 +70,7 @@ webpack 支持使用 `loader` 对文件进行预处理。你可以构建包括 J
 
 > `url-loader` 与 `file-loader` 类似, 用于打包文件，不过`url-loader`会将文件小于`limit`的值的的图片打包成 base64 格式的文件
 
-#### 打包样式文件
+### 打包样式文件
 
 - **style-loader 作用:** 把 CSS 插入到 DOM 中。
 - **css-loader 作用** 对 `@import` 和 `url()` 进行处理，就像 js 解析 `import/require()` 一样， 把多个 css 文件合并成一个
@@ -105,7 +107,7 @@ webpack 支持使用 `loader` 对文件进行预处理。你可以构建包括 J
 
 > 注：use 数组里编译的顺序是从上到下，从右到左，如果不注意先后顺序打包时可能会报错
 
-#### 打包 iconfont 文件
+### 打包 iconfont 文件
 
 ```
   module: {
@@ -120,11 +122,11 @@ webpack 支持使用 `loader` 对文件进行预处理。你可以构建包括 J
 
 更多文件格式的参考 [loader](https://webpack.docschina.org/loaders/)
 
-### plugins
+## plugins
 
 `plugin`可以在 webpack 运行到某个节点，帮你做一些事情，`plugin`目的在于解决 loader 无法实现的其他事。
 
-#### HtmlWebpackPlugin
+### HtmlWebpackPlugin
 
 `HtmlWebpackPlugin` 会在打包结束后自动生成一个 html 文件，并把打包生成 js 自动引入到这个 html 文件中, 在文件被打包之后执行
 
@@ -142,7 +144,7 @@ module.exports = {
 
 ```
 
-#### CleanWebpackPlugin
+### CleanWebpackPlugin
 
 `CleanWebpackPlugin` 在打包之前，帮你清理删除某个文件夹
 
@@ -154,7 +156,7 @@ module.exports = {
 
 更多插件参考 [plugin](https://webpack.docschina.org/plugins/)
 
-### entry & output
+## entry & output
 
 打包的入口起点和输出， 即使可以存在多个 `entry` 起点，但只能指定一个 `output` 配置
 
@@ -177,7 +179,7 @@ module.exports = {
 
 `publicPath` 支持文件路径使用 cdn 地址
 
-### Devtool
+## Devtool
 
 `sourceMap`可以将打包后的代码与原代码做具体到行和列的映射(mapping),从而便于开发者查询问题和 debug, `Devtool`属性可以选择生成`sourceMap`的方式
 
@@ -188,14 +190,14 @@ module.exports = {
 - `eval-` 每个模块使用 eval() 执行，并且 source map 转换为 DataUrl 后添加到 eval() 中
 - `module-` 源自 loader 的 `source map` 会得到更好的处理结果
 
-#### 最佳实践
+### 最佳实践
 
 - 开发环境下 `development`使用 `cheap-module-eval-source-map`，可以兼顾打包效率和精确度
 - 生产环境下 `production` 使用 `cheap-module-source-map`，提升精确度
 
 [更多关于 devtool 内容参考](https://webpack.docschina.org/configuration/devtool/)
 
-### devServer
+## devServer
 
 在每次编译代码时，手动运行 `npm run build` 会显得很麻烦。
 
@@ -218,7 +220,7 @@ webpack 没有提供自带的工具，我们需要自己安装
 	},
 ```
 
-#### 转发代理
+### 转发代理
 
 当拥有单独的 API 后端开发服务器并且希望在同一域上发送 API 请求时，我们可以使用`webpack-dev-server`对请求转发进行代理。
 
@@ -237,7 +239,7 @@ webpack 没有提供自带的工具，我们需要自己安装
 
 现在，对 `/api/users` 的请求会将请求代理到 `http://localhost:3000/api/users`。
 
-#### 实现一个简易的 webpackserver
+### 实现一个简易的 webpackserver
 
 同样我们可以使用`webpack-dev-middleware`和`express`来自己编写一个，简单的`webpack-dev-server`。
 
@@ -268,7 +270,7 @@ webpack 没有提供自带的工具，我们需要自己安装
 
 更多 [webpack-dev-server 配置](https://webpack.docschina.org/configuration/dev-server/) 参考
 
-### 解析 resolve
+## 解析 resolve
 
 这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
 
@@ -298,17 +300,17 @@ webpack 没有提供自带的工具，我们需要自己安装
 
 [更多 resolve 参考](https://webpack.docschina.org/configuration/resolve/)
 
-### 热模块替换 hmr
+## 热模块替换 hmr
 
 **模块热替换(HMR - hot module replacement)**功能会在应用程序运行过程中，替换、添加或删除 模块，而无需重新加载整个页面。
 
-#### hrm 作用
+### hrm 作用
 
 - 保留在完全重新加载页面期间丢失的应用程序状态。
 - 只更新变更内容，以节省宝贵的开发时间。
 - 在源代码中 CSS/JS 产生修改时，会立刻在浏览器中进行更新，这几乎相当于在浏览器 devtools 直接更改样式。
 
-#### hrm 使用
+### hrm 使用
 
 `webpack` 配置
 
@@ -338,7 +340,7 @@ webpack 没有提供自带的工具，我们需要自己安装
 - [模块热替换(hot module replacement)](https://webpack.docschina.org/concepts/hot-module-replacement/)
 - [Hot Module Replacement API](https://webpack.docschina.org/api/hot-module-replacement/)
 
-### babel
+## babel
 
 使用`babel`对 js 文件进行转化，是的 ES6 语法变成各个浏览器能够识别的语法
 

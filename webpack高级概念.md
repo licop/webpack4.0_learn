@@ -1,10 +1,10 @@
-## webpack 高级概念
+# webpack 高级概念
 
-### Tree Shaking
+## Tree Shaking
 
 `tree shaking` 就是使得 js 文件中没有被引入的代码不被打包到文件中, `tree shaking` 只在 ES Module 的引入方式下生效， 例如 `import` 和 `export`, 如果使用`commonjs`的打包方式则不生效。
 
-#### 使用
+### 使用
 
 一般来说，需要将`package.json`里添加`sideEffects`属性
 
@@ -27,7 +27,7 @@
 
 [更多关于 Tree Shaking](https://webpack.docschina.org/guides/tree-shaking/)
 
-### development 和 production 区分打包
+## development 和 production 区分打包
 
 由于开发模式(development)和生产模式(production) 下对打包需求的不一样，所以 webpack 打包的最佳实践是将两种模式下不同的配置抽离出来
 
@@ -35,7 +35,7 @@
 
 所以我们需要三个 webpack 配置，`webpack.common.js`， `webpack.dev.js`和`webpack.prod.js`, 然后使用`webpack-merge`插件将其不同环境下的特性和公用的部分合并。
 
-### 代码分割 code splitting
+## 代码分割 code splitting
 
 在最开始使用 Webpack 的时候, 都是将所有的 js 文件全部打包到一个 build.js 文件中(文件名取决与在 webpack.config.js 文件中 output.filename), 但是在大型项目中, build.js 可能过大, 导致页面加载时间过长. 这个时候就需要`code splitting`, `code splitting`就是将文件分割成块(chunk), 我们可以定义一些分割点(split point), 根据这些分割点对文件进行分块, 并实现按需加载。
 
@@ -73,7 +73,7 @@ Webpack 4 的 `Code Splitting` 最大的特点就是配置简单（0 配置起�
 - [SplitChunksPlugin 的文档](https://webpack.js.org/plugins/split-chunks-plugin/)
 - [ webpack 4: Code Splitting, chunk graph and the splitChunks optimization ](https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366)
 
-### chunk
+## chunk
 
 `Chunk`不同于`entry`、 `output`、`module`这样的概念，它们对应着 Webpack 配置对象中的一个字段，`Chunk`没有单独的配置字段，但是这个词出现在`CommonsChunkPlugin`（Webpack3 以前）、`optimization.splitChunks`（Webpack4 以后）这样的名称之中。在 webpack 中使用`code splitting`或者`entry入口`每生成一个入口就是一个`chunk`;
 
@@ -85,7 +85,7 @@ Webpack 4 的 `Code Splitting` 最大的特点就是配置简单（0 配置起�
 2. 异步加载模块
 3. 代码分割（code spliting）
 
-### 预获取/预加载模块(prefetch/preload module)
+## 预获取/预加载模块(prefetch/preload module)
 
 当使用`import() 语法`动态引入文件实现`lazy loading`懒加载时，可以仅在需要的时候才实现加载文件，减少加载时长。
 
@@ -105,7 +105,7 @@ import(/* webpackPrefetch: true */ './path/to/LoginModal.js');
 
 [更多 prefetch/preload 关于参考](https://webpack.docschina.org/guides/code-splitting/)
 
-### 对 css 文件进行代码分割
+## 对 css 文件进行代码分割
 
 webpack 会默认将 css 打包到 js 文件中，所谓的`css in js`
 
@@ -132,7 +132,7 @@ module.exports = {
 
 [更多 mini-css-extract-plugin 参考](https://webpack.docschina.org/plugins/mini-css-extract-plugin/)
 
-### shimming
+## shimming
 
 使用`ProvidePlugin`可以全局自动加载模块，而不必在任何地方`import`或`require`这些模块
 
@@ -147,7 +147,7 @@ module.exports = {
 
 [更多关于 shimming 的的参考](https://webpack.docschina.org/guides/shimming/)
 
-### webpack 分析工具
+## webpack 分析工具
 
 [webpack-chart](https://alexkuz.github.io/webpack-chart/): webpack stats 可交互饼图。
 [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): 可视化并分析你的 bundle，检查哪些模块占用空间，哪些可能是重复使用的。

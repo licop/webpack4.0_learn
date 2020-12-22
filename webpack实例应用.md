@@ -1,10 +1,10 @@
-## webpack 实例应用
+# webpack 实例应用
 
-### 打包 library
+## 打包 library
 
 webpack 除了可以打包一个业务项目应用程序，还可以打包一些类库`library`。
 
-#### 暴露 library
+### 暴露 library
 
 当我们打包`library`时，我们希望使用者有多种方式可以引用它，例如`ES2015 module import`, `Commonjs Module require`, `AMD Module require`, `script标签`等引用方法，，需要在 output 中添加 `library`和`libraryTarget` 属性。
 
@@ -21,7 +21,7 @@ webpack 除了可以打包一个业务项目应用程序，还可以打包一些
 
 [更多关于 libraryTarget 和 library 参考](https://webpack.docschina.org/configuration/output/)
 
-#### 将公用库 externals
+### 将公用库 externals
 
 有时如果执行 `webpack`，你会发现创建了一个体积相当大的文件。如果你查看这个文件，会看到公用库如 `lodash` 也被打包到代码中。在这种场景中，我们更倾向于把 `lodash` 当作 `peerDependency`。也就是说，用户应该已经安装过 `lodash`。这是可以使用`externals`来配置。
 
@@ -46,7 +46,7 @@ webpack 除了可以打包一个业务项目应用程序，还可以打包一些
 [更多关于 externals 的参考](https://webpack.docschina.org/configuration/externals/)
 [更多关于 library 库打包参考](https://webpack.docschina.org/guides/author-libraries/)
 
-### 打包 Typescript
+## 打包 Typescript
 
 `TypeScript` 是 `JavaScript` 的超集，为其增加了类型系统，可以编译为普通 `JavaScript` 代码。
 
@@ -66,7 +66,7 @@ webpack 除了可以打包一个业务项目应用程序，还可以打包一些
 
 [更多 typescript 参考](https://webpack.docschina.org/guides/typescript/)
 
-### 打包 PWA
+## 打包 PWA
 
 渐进式网络应用程序(`progressive web application - PWA`)，是一种可以提供类似于 native app(原生应用程序) 体验的 web app(网络应用程序)。PWA 可以用来做很多事。其中最重要的是，在离线(`offline`)时应用程序能够继续运行功能。这是通过使用名为 `Service Workers` 的 web 技术来实现的。
 
@@ -101,8 +101,6 @@ webpack 除了可以打包一个业务项目应用程序，还可以打包一些
 
 [更多关于 pwa 打包](https://webpack.docschina.org/guides/progressive-web-application/)参考
 
-### 打包单页面应用
+## 打包单页面应用
 
 当使用`react-router-dom` 的 `BrowserRouter`的路由使用单页面应用时，开发时需要将`devServer`的`historyApiFallback`设置为 `true`，否则将路由将无法跳转，生产环境下需要后端做 `nignx` 配置
-
-### 打包多页面应用
