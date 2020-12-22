@@ -10,6 +10,6 @@
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-eval("console.log('world');\n\n//# sourceURL=webpack://makeLoader/./src/index.js?");
+eval("console.error('licop');\n\n//# sourceURL=webpack://makeLoader/./src/index.js?");
 /******/ })()
 ;

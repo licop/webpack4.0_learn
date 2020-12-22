@@ -15,13 +15,16 @@ module.exports = {
 			use: [
 				{
 					loader: 'replaceLoader',
-				},
-				{
-					loader: 'replaceLoaderAsync',
 					options: {
 						name: 'lee'
 					}
-				},
+				}
+				// {
+				// 	loader: 'replaceLoaderAsync',
+				// 	options: {
+				// 		name: 'lee'
+				// 	}
+				// },
 			]
 		}]
 	},
